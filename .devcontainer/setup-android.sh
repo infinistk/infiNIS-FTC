@@ -7,8 +7,16 @@ export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
 
 mkdir -p "$ANDROID_HOME/cmdline-tools/latest"
 
-sudo apt-get update
-sudo apt-get install -y curl unzip
+# curl и unzip уже доступны в базовом devcontainer
+command -v curl >/dev/null || {
+  echo "ERROR: curl is missing"
+  exit 1
+}
+
+command -v unzip >/dev/null || {
+  echo "ERROR: unzip is missing"
+  exit 1
+}
 
 if [ ! -f "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
   curl -fL \
